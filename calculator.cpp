@@ -1,13 +1,13 @@
 /*
 Basic console calculator program that can perform addition, subtraction, multiplication, and division. 
 Accepts input from the user or parameters from console and displays the result. 
-
 */
-
 
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include "operations.h"
+
 
 int main(int argc, char* argv[]) {
     // Check if there are enough arguments
@@ -16,37 +16,27 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Get the operation and numbers from the arguments
+    // argument handling
     std::string operation = argv[1];
     double num1 = std::atof(argv[2]);
     double num2 = std::atof(argv[3]);
 
-    // Perform the operation
-    double result;
+    double result;   //can't use switch case effectively, to my dissapointment 
     if (operation == "add") {
-        result = num1 + num2;
+        result = addition(num1,num2);
     } else if (operation == "sub") {
-        result = num1 - num2;
+        result = subtraction(num1,num2);
     } else if (operation == "mul") {
-        result = num1 * num2;
+        result = multiplication(num1,num2);
     } else if (operation == "div") {
-        if (num2 == 0) {
-            std::cout << "Error: Division by zero" << std::endl;
-            return 1;
-        }
-        result = num1 / num2;
+        result = division(num1,num2);
     } else if (operation == "mod") {
-        if (num2 == 0) {
-            std::cout << "Error: Division by zero" << std::endl;
-            return 1;
-        }
-        result = static_cast<int>(num1) % static_cast<int>(num1);
+        result = modulo(num1,num2);
     } else {
         std::cout << "Error: Invalid operation" << std::endl;
         return 1;
     }
 
-    // Display the result
     std::cout << "Result: " << result << std::endl;
 
     return 0;
