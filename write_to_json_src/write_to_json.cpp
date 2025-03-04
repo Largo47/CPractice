@@ -17,21 +17,15 @@ using json = nlohmann::json;
 
 int main() {
   using namespace nlohmann::literals;
-  /*
-  json src_file{R"({
-    "movie": "Star Wars",
-    "released": true,
-    "year": 1977
-  })"_json};
-  */
+
+  //json o1 = R"( {"tasks": [ {"args": [ "-fdiagnostics-color=always", "-g", "${fileDirname}\\write_to_json.cpp", "${fileDirname}\\json.hpp", "-o", "${fileDirname}\\executables\\${fileBasenameNoExtension}.exe"] } ] } )"_json;
+  //doesn't work
   std::fstream File;
-  //File.open(R"(..\.vscode\tasks.json)", std::ios::in);
-  //Script throws errors when trying to parse nested ..\.vscode\tasks.json, but works when parsing a single layer test file 
-  File.open(R"(example.json)", std::ios::in);
+  File.open(R"(tasks.json)", std::ios::in);
   json src_file{json::parse(File)};
   File.close();
-
+  //src_file.update(o1, true);
   File.open(R"(tasks.json)", std::ios::out);
-  File << src_file;
+  File << std::setw(4) << src_file;
   File.close();
 }
