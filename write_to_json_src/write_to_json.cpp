@@ -10,7 +10,9 @@ PROGRESS
 4. -,,-, but take n parameters
 
 */
+#include <iostream>
 #include <fstream>
+#include <string>
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -18,14 +20,12 @@ using json = nlohmann::json;
 int main() {
   using namespace nlohmann::literals;
 
-  //json o1 = R"( {"tasks": [ {"args": [ "-fdiagnostics-color=always", "-g", "${fileDirname}\\write_to_json.cpp", "${fileDirname}\\json.hpp", "-o", "${fileDirname}\\executables\\${fileBasenameNoExtension}.exe"] } ] } )"_json;
-  //doesn't work
   std::fstream File;
-  File.open(R"(tasks.json)", std::ios::in);
+  //File.open(R"(tasks.json)", std::ios::in);
+  File.open(R"(example.json)", std::ios::in);
   json src_file{json::parse(File)};
   File.close();
-  //src_file.update(o1, true);
-  File.open(R"(tasks.json)", std::ios::out);
-  File << std::setw(4) << src_file;
+  File.open(R"(example2.json)", std::ios::out);
+  File << std::setw(2) << src_file;
   File.close();
 }
